@@ -23,9 +23,7 @@ const ServerConsole = () => {
 
     const queryString = window.location.search;
 
-    const urlParams = new URLSearchParams(queryString);
-
-    const fullscreen = urlParams.has("fullscreen");
+    const fullscreen = !!queryString;
 
     return (
         <ServerContentBlock title={'Console'} css={tw`flex flex-wrap`}>
