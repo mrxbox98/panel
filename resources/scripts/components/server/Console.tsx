@@ -207,7 +207,7 @@ export default () => {
     }
 
     return (
-        <div css={tw`text-xs font-mono relative`}>
+        <div css={window.location.href.includes("/console") ? tw`text-xs font-mono relative w-full h-screen` : tw`text-xs font-mono relative`}>
             <SpinnerOverlay visible={!connected} size={'large'} />
             <div
                 css={[
@@ -216,7 +216,7 @@ export default () => {
                 ]}
                 style={{ minHeight: '16rem' }}
             >
-                <TerminalDiv id={'terminal'} ref={ref} />
+                <TerminalDiv css={tw`h-full`} id={'terminal'} ref={ref} />
             </div>
             {canSendCommands &&
                 <div css={tw`rounded-b bg-neutral-900 text-neutral-100 flex items-baseline`}>
