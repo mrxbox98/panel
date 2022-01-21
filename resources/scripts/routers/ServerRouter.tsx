@@ -103,42 +103,48 @@ const ServerRouter = ({ match, location }: RouteComponentProps<{ id: string }>) 
                     <Spinner size={'large'} centered/>
                 :
                 <>
-                    <CSSTransition timeout={150} classNames={'fade'} appear in>
-                        <SubNavigation>
-                            <div>
-                                <NavLink to={`${match.url}`} exact>Console</NavLink>
-                                <Can action={'file.*'}>
-                                    <NavLink to={`${match.url}/files`}>File Manager</NavLink>
-                                </Can>
-                                <Can action={'database.*'}>
-                                    <NavLink to={`${match.url}/databases`}>Databases</NavLink>
-                                </Can>
-                                <Can action={'schedule.*'}>
-                                    <NavLink to={`${match.url}/schedules`}>Schedules</NavLink>
-                                </Can>
-                                <Can action={'user.*'}>
-                                    <NavLink to={`${match.url}/users`}>Users</NavLink>
-                                </Can>
-                                <Can action={'backup.*'}>
-                                    <NavLink to={`${match.url}/backups`}>Backups</NavLink>
-                                </Can>
-                                <Can action={'allocation.*'}>
-                                    <NavLink to={`${match.url}/network`}>Network</NavLink>
-                                </Can>
-                                <Can action={'startup.*'}>
-                                    <NavLink to={`${match.url}/startup`}>Startup</NavLink>
-                                </Can>
-                                <Can action={[ 'settings.*', 'file.sftp' ]} matchAny>
-                                    <NavLink to={`${match.url}/settings`}>Settings</NavLink>
-                                </Can>
-                                {rootAdmin &&
-                                <a href={'/admin/servers/view/' + serverId} rel="noreferrer" target={'_blank'}>
-                                    <FontAwesomeIcon icon={faExternalLinkAlt}/>
-                                </a>
-                                }
-                            </div>
-                        </SubNavigation>
-                    </CSSTransition>
+                    {window.location.href.includes("/console") ?
+                        <></>
+                        :
+                        <CSSTransition timeout={150} classNames={'fade'} appear in>
+                            <SubNavigation>
+                                <div>
+                                    <NavLink to={`${match.url}`} exact>Console</NavLink>
+                                    <Can action={'file.*'}>
+                                        <NavLink to={`${match.url}/files`}>File Manager</NavLink>
+                                    </Can>
+                                    <Can action={'database.*'}>
+                                        <NavLink to={`${match.url}/databases`}>Databases</NavLink>
+                                    </Can>
+                                    <Can action={'schedule.*'}>
+                                        <NavLink to={`${match.url}/schedules`}>Schedules</NavLink>
+                                    </Can>
+                                    <Can action={'user.*'}>
+                                        <NavLink to={`${match.url}/users`}>Users</NavLink>
+                                    </Can>
+                                    <Can action={'backup.*'}>
+                                        <NavLink to={`${match.url}/backups`}>Backups</NavLink>
+                                    </Can>
+                                    <Can action={'allocation.*'}>
+                                        <NavLink to={`${match.url}/network`}>Network</NavLink>
+                                    </Can>
+                                    <Can action={'startup.*'}>
+                                        <NavLink to={`${match.url}/startup`}>Startup</NavLink>
+                                    </Can>
+                                    <Can action={[ 'settings.*', 'file.sftp' ]} matchAny>
+                                        <NavLink to={`${match.url}/settings`}>Settings</NavLink>
+                                    </Can>
+                                    {rootAdmin &&
+                                    <a href={'/admin/servers/view/' + serverId} rel="noreferrer" target={'_blank'}>
+                                        <FontAwesomeIcon icon={faExternalLinkAlt}/>
+                                    </a>
+                                    }
+                                </div>
+                            </SubNavigation>
+                        </CSSTransition>
+                    }
+                    
+                    
                     <InstallListener/>
                     <TransferListener/>
                     <WebsocketHandler/>
