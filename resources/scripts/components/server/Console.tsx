@@ -201,6 +201,11 @@ export default () => {
         };
     }, [ connected, instance ]);
 
+    function openConsole()
+    {
+        window.open(window.location.href+"?fullscreen=true","Server Console");
+    }
+
     return (
         <div css={tw`text-xs font-mono relative`}>
             <SpinnerOverlay visible={!connected} size={'large'} />
@@ -224,6 +229,9 @@ export default () => {
                             disabled={!instance || !connected}
                             onKeyDown={handleCommandKeyDown}
                         />
+                        <button onClick={openConsole}>
+                            open console
+                        </button>
                     </div>
                 </div>
             }

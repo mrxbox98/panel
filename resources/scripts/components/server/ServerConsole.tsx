@@ -21,6 +21,12 @@ const ServerConsole = () => {
     const isTransferring = ServerContext.useStoreState(state => state.server.data!.isTransferring);
     const eggFeatures = ServerContext.useStoreState(state => state.server.data!.eggFeatures, isEqual);
 
+    const queryString = window.location.search;
+
+    const urlParams = new URLSearchParams(queryString);
+
+    const fullscreen = urlParams.has("fullscreen");
+
     return (
         <ServerContentBlock title={'Console'} css={tw`flex flex-wrap`}>
             <div css={tw`w-full lg:w-1/4`}>
@@ -50,21 +56,32 @@ const ServerConsole = () => {
                         </Can>
                 }
             </div>
-            <div css={tw`w-full lg:w-3/4 mt-4 lg:mt-0 lg:pl-4`}>
-                <Spinner.Suspense>
-                    <ErrorBoundary>
-                        <ChunkedConsole/>
-                    </ErrorBoundary>
-                    <ChunkedStatGraphs/>
-                </Spinner.Suspense>
-                <React.Suspense fallback={null}>
-                    {eggFeatures.includes('eula') && <EulaModalFeature/>}
-                    {eggFeatures.includes('java_version') && <JavaVersionModalFeature/>}
-                    {eggFeatures.includes('gsl_token') && <GSLTokenModalFeature/>}
-                    {eggFeatures.includes('pid_limit') && <PIDLimitModalFeature/>}
-                    {eggFeatures.includes('steam_disk_space') && <SteamDiskSpaceFeature/>}
-                </React.Suspense>
-            </div>
+            {fullscreen ? 
+                <div css={tw`w-full lg:w-3/4 mt-4 lg:mt-0 lg:pl-4`}>
+                    <Spinner.Suspense>
+                        <ErrorBoundary>
+                            <ChunkedConsole/>
+                        </ErrorBoundary>
+                        <ChunkedStatGraphs/>
+                    </Spinner.Suspense>
+                    <React.Suspense fallback={null}>
+                        {eggFeatures.includes('eula') && <EulaModalFeature/>}
+                        {eggFeatures.includes('java_version') && <JavaVersionModalFeature/>}
+                        {eggFeatures.includes('gsl_token') && <GSLTokenModalFeature/>}
+                        {eggFeatures.includes('pid_limit') && <PIDLimitModalFeature/>}
+                        {eggFeatures.includes('steam_disk_space') && <SteamDiskSpaceFeature/>}
+                    </React.Suspense>
+                </div>
+                :
+                <div css={tw`w-full h-full`}>
+                    <Spinner.Suspense>
+                        <ErrorBoundary>
+                            <ChunkedConsole/>
+                        </ErrorBoundary>
+                    </Spinner.Suspense>
+                </div>
+
+            }
         </ServerContentBlock>
     );
 };
