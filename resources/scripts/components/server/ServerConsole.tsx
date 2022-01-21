@@ -28,7 +28,7 @@ const ServerConsole = () => {
     return (
         <ServerContentBlock title={'Console'} css={tw`flex flex-wrap`}>
             {fullscreen ?
-                <div css={tw`w-full h-full`}>
+                <div css={tw`absolute w-screen h-screen`}>
                     <Spinner.Suspense>
                         <ErrorBoundary>
                             <ChunkedConsole />
