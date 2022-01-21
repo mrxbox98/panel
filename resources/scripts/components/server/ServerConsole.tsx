@@ -24,7 +24,7 @@ const ServerConsole = () => {
     const fullscreen = window.location.href.includes("/console");
 
     return (
-        <ServerContentBlock title={'Console'} css={fullscreen ? tw`h-screen w-screen` : tw`flex flex-wrap`}>
+        <ServerContentBlock title={'Console'} css={fullscreen ? tw`absolute h-screen w-screen` : tw`flex flex-wrap`}>
             {fullscreen ?
                 <div css={tw`absolute w-screen h-screen`}>
                     <Spinner.Suspense>
