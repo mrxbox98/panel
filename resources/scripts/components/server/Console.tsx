@@ -216,7 +216,7 @@ export default () => {
                 ]}
                 style={{ minHeight: '16rem' }}
             >
-                <TerminalDiv css={window.location.href.includes("/console") ? tw`h-max` : tw``} id={'terminal'} ref={ref} />
+                <TerminalDiv style={{height:'max-content'}} id={'terminal'} ref={ref} />
             </div>
             {canSendCommands &&
                 <div css={tw`rounded-b bg-neutral-900 text-neutral-100 flex items-baseline`}>
