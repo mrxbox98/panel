@@ -230,7 +230,7 @@ export default () => {
                             disabled={!instance || !connected}
                             onKeyDown={handleCommandKeyDown}
                         />
-                        <button onClick={openConsole}>
+                        <button hidden={window.location.href.includes("/console")} onClick={openConsole}>
                             open console
                         </button>
                     </div>
