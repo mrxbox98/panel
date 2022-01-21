@@ -90,7 +90,7 @@ const ServerRouter = ({ match, location }: RouteComponentProps<{ id: string }>) 
 
     return (
         <React.Fragment key={'server-router'}>
-            {match.url.includes("/console") ?
+            {window.location.href.includes("/console") ?
                 <>
                 </>
                 :
