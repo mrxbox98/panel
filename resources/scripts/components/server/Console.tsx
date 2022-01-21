@@ -76,11 +76,11 @@ export default () => {
     const webLinksAddon = new WebLinksAddon();
     const scrollDownHelperAddon = new ScrollDownHelperAddon();
     const { connected, instance } = ServerContext.useStoreState(state => state.socket);
-    const [ canSendCommands ] = usePermissions([ 'control.console' ]);
+    const [canSendCommands] = usePermissions(['control.console']);
     const serverId = ServerContext.useStoreState(state => state.server.data!.id);
     const isTransferring = ServerContext.useStoreState(state => state.server.data!.isTransferring);
-    const [ history, setHistory ] = usePersistedState<string[]>(`${serverId}:command_history`, []);
-    const [ historyIndex, setHistoryIndex ] = useState(-1);
+    const [history, setHistory] = usePersistedState<string[]>(`${serverId}:command_history`, []);
+    const [historyIndex, setHistoryIndex] = useState(-1);
 
     const handleConsoleOutput = (line: string, prelude = false) => terminal.writeln(
         (prelude ? TERMINAL_PRELUDE : '') + line.replace(/(?:\r\n|\r|\n)$/im, '') + '\u001b[0m',
@@ -128,7 +128,7 @@ export default () => {
 
         const command = e.currentTarget.value;
         if (e.key === 'Enter' && command.length > 0) {
-            setHistory(prevHistory => [ command, ...prevHistory! ].slice(0, 32));
+            setHistory(prevHistory => [command, ...prevHistory!].slice(0, 32));
             setHistoryIndex(-1);
 
             instance && instance.send('send command', command);
@@ -162,7 +162,7 @@ export default () => {
                 return true;
             });
         }
-    }, [ terminal, connected ]);
+    }, [terminal, connected]);
 
     useEventListener('resize', debounce(() => {
         if (terminal.element) {
@@ -200,11 +200,10 @@ export default () => {
                 });
             }
         };
-    }, [ connected, instance ]);
+    }, [connected, instance]);
 
-    function openConsole()
-    {
-        window.open(window.location.href+"/console","Server Console");
+    function openConsole() {
+        window.open(window.location.href + "/console", "Server Console");
     }
 
     return (
@@ -217,12 +216,12 @@ export default () => {
                 ]}
                 style={{ minHeight: '16rem' }}
             >
-                <TerminalDiv style={window.location.href.includes("/console") ? {height: "calc(100% - 54px)"} : {}}id={'terminal'} ref={ref} />
+                <TerminalDiv style={window.location.href.includes("/console") ? { height: "calc(100% - 54px)" } : {}} id={'terminal'} ref={ref} />
             </div>
             {canSendCommands &&
                 <div css={tw`rounded-b bg-neutral-900 text-neutral-100 flex items-baseline`}>
                     <div css={tw`flex-shrink-0 p-2 font-bold`}>$</div>
-                    <div css={tw`w-full`}>
+                    <div css={tw`w-full inline`}>
                         <CommandInput
                             type={'text'}
                             placeholder={'Type a command...'}
@@ -231,7 +230,9 @@ export default () => {
                             onKeyDown={handleCommandKeyDown}
                         />
                         <button hidden={window.location.href.includes("/console")} onClick={openConsole}>
-                            open console
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
                         </button>
                     </div>
                 </div>
