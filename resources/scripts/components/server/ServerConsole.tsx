@@ -21,9 +21,7 @@ const ServerConsole = () => {
     const isTransferring = ServerContext.useStoreState(state => state.server.data!.isTransferring);
     const eggFeatures = ServerContext.useStoreState(state => state.server.data!.eggFeatures, isEqual);
 
-    const queryString = window.location.search;
-
-    const fullscreen = !!queryString;
+    const fullscreen = window.location.href.includes("/console");
 
     return (
         <ServerContentBlock title={'Console'} css={tw`flex flex-wrap`}>

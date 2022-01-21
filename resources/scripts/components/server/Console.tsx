@@ -203,7 +203,7 @@ export default () => {
 
     function openConsole()
     {
-        window.open(window.location.href+"?fullscreen=true","Server Console");
+        window.open(window.location.href+"/console","Server Console");
     }
 
     return (

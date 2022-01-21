@@ -90,7 +90,12 @@ const ServerRouter = ({ match, location }: RouteComponentProps<{ id: string }>) 
 
     return (
         <React.Fragment key={'server-router'}>
-            <NavigationBar/>
+            {match.url.includes("/console") ?
+                <>
+                </>
+                :
+                <NavigationBar/>
+            }
             {(!uuid || !id) ?
                 error ?
                     <ServerError message={error}/>
@@ -144,6 +149,7 @@ const ServerRouter = ({ match, location }: RouteComponentProps<{ id: string }>) 
                             <TransitionRouter>
                                 <Switch location={location}>
                                     <Route path={`${match.path}`} component={ServerConsole} exact/>
+                                    <Route path={`${match.path}/console`} component={ServerConsole} exact/>
                                     <Route path={`${match.path}/files`} exact>
                                         <RequireServerPermission permissions={'file.*'}>
                                             <FileManagerContainer/>
