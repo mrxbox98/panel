@@ -217,7 +217,7 @@ export default () => {
                 ]}
                 style={{ minHeight: '16rem' }}
             >
-                <TerminalDiv style={window.location.href.includes("/console") ? {height: "calc(100% - 108px)"} : {}}id={'terminal'} ref={ref} />
+                <TerminalDiv style={window.location.href.includes("/console") ? {height: "calc(100% - 54px)"} : {}}id={'terminal'} ref={ref} />
             </div>
             {canSendCommands &&
                 <div css={tw`rounded-b bg-neutral-900 text-neutral-100 flex items-baseline`}>
