@@ -15,6 +15,7 @@ import useEventListener from '@/plugins/useEventListener';
 import { debounce } from 'debounce';
 import { usePersistedState } from '@/plugins/usePersistedState';
 import { SocketEvent, SocketRequest } from '@/components/server/events';
+import { callbackify } from 'util';
 
 const theme = {
     background: th`colors.black`.toString(),
@@ -216,7 +217,7 @@ export default () => {
                 ]}
                 style={{ minHeight: '16rem' }}
             >
-                <TerminalDiv css={window.location.href.includes("/console") ? tw`h-full pb-10` : tw``} id={'terminal'} ref={ref} />
+                <TerminalDiv style={window.location.href.includes("/console") ? {height: "calc(100% - 54px)"} : {}}id={'terminal'} ref={ref} />
             </div>
             {canSendCommands &&
                 <div css={tw`rounded-b bg-neutral-900 text-neutral-100 flex items-baseline`}>
