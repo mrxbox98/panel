@@ -16,7 +16,7 @@ import isEqual from 'react-fast-compare';
 const isAlarmState = (current: number, limit: number): boolean => limit > 0 && (current / (limit * 1024 * 1024) >= 0.90);
 
 const Icon = memo(styled(FontAwesomeIcon)<{ $alarm: boolean }>`
-    ${props => props.$alarm ? tw`text-red-400` : tw`text-neutral-500`};
+    ${props => props.$alarm ? tw`text-red-400` : tw`text-neutral-200`};
 `, isEqual);
 
 const IconDescription = styled.p<{ $alarm: boolean }>`
@@ -92,8 +92,8 @@ export default ({ server, className }: { server: Server; className?: string }) =
                 </div>
             </div>
             <div css={tw`hidden lg:col-span-2 lg:flex ml-4 justify-end h-full`}>
-                <FontAwesomeIcon icon={faEthernet} css={tw`text-neutral-500`}/>
-                <p css={tw`text-sm text-neutral-400 ml-2`}>
+                <FontAwesomeIcon icon={faEthernet} css={tw`text-neutral-200`}/>
+                <p css={tw`text-sm text-neutral-200 ml-2`}>
                     {
                         server.allocations.filter(alloc => alloc.isDefault).map(allocation => (
                             <React.Fragment key={allocation.ip + allocation.port.toString()}>
