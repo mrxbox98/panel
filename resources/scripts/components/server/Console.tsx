@@ -221,8 +221,8 @@ export default () => {
             {canSendCommands &&
                 <div css={tw`rounded-b bg-neutral-900 text-neutral-100 flex items-baseline`}>
                     <div css={tw`flex-shrink-0 p-2 font-bold`}>$</div>
-                    <div css={tw`w-full inline-block`}>
-                        <div style={{width: '90%'}}>
+                    <div css={tw`w-full`}>
+                        <div style={{width: '90%'}} css={tw`inline-block`}>
                             <CommandInput
                                 type={'text'}
                                 placeholder={'Type a command...'}
@@ -231,7 +231,7 @@ export default () => {
                                 onKeyDown={handleCommandKeyDown}
                             />
                         </div>
-                        <button css={tw`h-6 w-6`} hidden={window.location.href.includes("/console")} onClick={openConsole}>
+                        <button css={tw`h-6 w-6 inline-block`} hidden={window.location.href.includes("/console")} onClick={openConsole}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                             </svg>
