@@ -221,7 +221,7 @@ export default () => {
             {canSendCommands &&
                 <div css={tw`rounded-b bg-neutral-900 text-neutral-100 flex items-baseline`}>
                     <div css={tw`flex-shrink-0 p-2 font-bold`}>$</div>
-                    <span css={tw`w-full inline`}>
+                    <div css={tw`w-full inline-block`}>
                         <div style={{width: '90%'}}>
                             <CommandInput
                                 type={'text'}
@@ -236,7 +236,7 @@ export default () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                             </svg>
                         </button>
-                    </span>
+                    </div>
                 </div>
             }
         </div>
