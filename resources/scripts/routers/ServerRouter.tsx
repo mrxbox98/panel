@@ -143,8 +143,7 @@ const ServerRouter = ({ match, location }: RouteComponentProps<{ id: string }>) 
                             </SubNavigation>
                         </CSSTransition>
                     }
-                    
-                    
+
                     <InstallListener/>
                     <TransferListener/>
                     <WebsocketHandler/>

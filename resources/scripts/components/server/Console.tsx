@@ -202,7 +202,7 @@ export default () => {
         };
     }, [connected, instance]);
 
-    function openConsole() {
+    function openConsole () {
         window.open(window.location.href + "/console", "Server Console");
     }
 
