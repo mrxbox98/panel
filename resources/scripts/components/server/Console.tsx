@@ -203,7 +203,7 @@ export default () => {
     }, [connected, instance]);
 
     function openConsole () {
-        window.open(window.location.href + "/console", "Server Console","height=500,width=1000");
+        window.open(window.location.href + "/console", "Server Console","height=100,width=1500");
     }
 
     return (
