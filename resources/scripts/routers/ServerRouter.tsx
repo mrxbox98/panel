@@ -90,7 +90,7 @@ const ServerRouter = ({ match, location }: RouteComponentProps<{ id: string }>) 
 
     return (
         <React.Fragment key={'server-router'}>
-            {window.location.href.includes("/console") ?
+            {window.location.href.includes('/console') ?
                 <>
                 </>
                 :
@@ -103,7 +103,7 @@ const ServerRouter = ({ match, location }: RouteComponentProps<{ id: string }>) 
                     <Spinner size={'large'} centered/>
                 :
                 <>
-                    {window.location.href.includes("/console") ?
+                    {window.location.href.includes('/console') ?
                         <></>
                         :
                         <CSSTransition timeout={150} classNames={'fade'} appear in>

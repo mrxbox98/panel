@@ -21,7 +21,7 @@ const ServerConsole = () => {
     const isTransferring = ServerContext.useStoreState(state => state.server.data!.isTransferring);
     const eggFeatures = ServerContext.useStoreState(state => state.server.data!.eggFeatures, isEqual);
 
-    const fullscreen = window.location.href.includes("/console");
+    const fullscreen = window.location.href.includes('/console');
 
     return (
         <ServerContentBlock title={'Console'} css={fullscreen ? tw`absolute h-screen w-screen left-0 top-0 px-0 mt-0` : tw`flex flex-wrap`}>
@@ -57,7 +57,7 @@ const ServerConsole = () => {
                                     </ContentContainer>
                                 </div>
                                 :
-                                <Can action={['control.start', 'control.stop', 'control.restart']} matchAny>
+                                <Can action={[ 'control.start', 'control.stop', 'control.restart' ]} matchAny>
                                     <PowerControls />
                                 </Can>
                         }

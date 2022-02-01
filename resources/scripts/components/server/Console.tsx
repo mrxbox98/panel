@@ -15,7 +15,6 @@ import useEventListener from '@/plugins/useEventListener';
 import { debounce } from 'debounce';
 import { usePersistedState } from '@/plugins/usePersistedState';
 import { SocketEvent, SocketRequest } from '@/components/server/events';
-import { callbackify } from 'util';
 
 const theme = {
     background: th`colors.black`.toString(),
@@ -76,11 +75,11 @@ export default () => {
     const webLinksAddon = new WebLinksAddon();
     const scrollDownHelperAddon = new ScrollDownHelperAddon();
     const { connected, instance } = ServerContext.useStoreState(state => state.socket);
-    const [canSendCommands] = usePermissions(['control.console']);
+    const [ canSendCommands ] = usePermissions([ 'control.console' ]);
     const serverId = ServerContext.useStoreState(state => state.server.data!.id);
     const isTransferring = ServerContext.useStoreState(state => state.server.data!.isTransferring);
-    const [history, setHistory] = usePersistedState<string[]>(`${serverId}:command_history`, []);
-    const [historyIndex, setHistoryIndex] = useState(-1);
+    const [ history, setHistory ] = usePersistedState<string[]>(`${serverId}:command_history`, []);
+    const [ historyIndex, setHistoryIndex ] = useState(-1);
 
     const handleConsoleOutput = (line: string, prelude = false) => terminal.writeln(
         (prelude ? TERMINAL_PRELUDE : '') + line.replace(/(?:\r\n|\r|\n)$/im, '') + '\u001b[0m',
@@ -128,7 +127,7 @@ export default () => {
 
         const command = e.currentTarget.value;
         if (e.key === 'Enter' && command.length > 0) {
-            setHistory(prevHistory => [command, ...prevHistory!].slice(0, 32));
+            setHistory(prevHistory => [ command, ...prevHistory! ].slice(0, 32));
             setHistoryIndex(-1);
 
             instance && instance.send('send command', command);
@@ -162,7 +161,7 @@ export default () => {
                 return true;
             });
         }
-    }, [terminal, connected]);
+    }, [ terminal, connected ]);
 
     useEventListener('resize', debounce(() => {
         if (terminal.element) {
@@ -200,14 +199,14 @@ export default () => {
                 });
             }
         };
-    }, [connected, instance]);
+    }, [ connected, instance ]);
 
     function openConsole () {
-        window.open(window.location.href + "/console", "Server Console","height=1000,width=1500");
+        window.open(window.location.href + '/console', 'Server Console', 'height=1000,width=1500');
     }
 
     return (
-        <div css={window.location.href.includes("/console") ? tw`text-xs font-mono relative w-full h-screen overflow-hidden` : tw`text-xs font-mono relative`}>
+        <div css={window.location.href.includes('/console') ? tw`text-xs font-mono relative w-full h-screen overflow-hidden` : tw`text-xs font-mono relative`}>
             <SpinnerOverlay visible={!connected} size={'large'} />
             <div
                 css={[
@@ -216,7 +215,7 @@ export default () => {
                 ]}
                 style={{ minHeight: '16rem' }}
             >
-                <TerminalDiv style={window.location.href.includes("/console") ? { height: "calc(100% - 54px)" } : {}} id={'terminal'} ref={ref} />
+                <TerminalDiv style={window.location.href.includes('/console') ? { height: 'calc(100% - 54px)' } : {}} id={'terminal'} ref={ref} />
             </div>
             {canSendCommands &&
                 <div css={tw`rounded-b bg-neutral-900 text-neutral-100 flex items-baseline`}>
@@ -230,7 +229,7 @@ export default () => {
                             onKeyDown={handleCommandKeyDown}
                         />
                     </div>
-                    <button css={tw`m-auto mr-2 inline-block`} hidden={window.location.href.includes("/console")} onClick={openConsole}>
+                    <button css={tw`m-auto mr-2 inline-block`} hidden={window.location.href.includes('/console')} onClick={openConsole}>
                         <svg xmlns="http://www.w3.org/2000/svg" css={tw`m-auto w-6 h-6`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
