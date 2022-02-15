@@ -90,12 +90,7 @@ const ServerRouter = ({ match, location }: RouteComponentProps<{ id: string }>) 
 
     return (
         <React.Fragment key={'server-router'}>
-            {window.location.href.includes('/console') ?
-                <>
-                </>
-                :
-                <NavigationBar/>
-            }
+            { !window.location.href.includes('/console') && <NavigationBar/> }
             {(!uuid || !id) ?
                 error ?
                     <ServerError message={error}/>
@@ -103,9 +98,7 @@ const ServerRouter = ({ match, location }: RouteComponentProps<{ id: string }>) 
                     <Spinner size={'large'} centered/>
                 :
                 <>
-                    {window.location.href.includes('/console') ?
-                        <></>
-                        :
+                    {!window.location.href.includes('/console') &&
                         <CSSTransition timeout={150} classNames={'fade'} appear in>
                             <SubNavigation>
                                 <div>

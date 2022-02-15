@@ -201,9 +201,9 @@ export default () => {
         };
     }, [ connected, instance ]);
 
-    function openConsole () {
+    const openConsole = () => {
         window.open(window.location.href + '/console', 'Server Console', 'height=1000,width=1500');
-    }
+    };
 
     return (
         <div css={window.location.href.includes('/console') ? tw`text-xs font-mono relative w-full h-screen overflow-hidden` : tw`text-xs font-mono relative`}>
@@ -215,7 +215,7 @@ export default () => {
                 ]}
                 style={{ minHeight: '16rem' }}
             >
-                <TerminalDiv style={window.location.href.includes('/console') ? { height: 'calc(100% - 54px)' } : {}} id={'terminal'} ref={ref} />
+                <TerminalDiv style={{ height: window.location.href.includes('/console') ? 'calc(100% - 54px)' : 'auto' }} id={'terminal'} ref={ref} />
             </div>
             {canSendCommands &&
                 <div css={tw`rounded-b bg-neutral-900 text-neutral-100 flex items-baseline`}>
