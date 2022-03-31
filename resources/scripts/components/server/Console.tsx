@@ -206,7 +206,7 @@ export default () => {
     };
 
     return (
-        <div css={window.location.href.includes('/console') ? tw`text-xs font-mono relative w-full h-screen overflow-hidden` : tw`text-xs font-mono relative`}>
+        <div css={location.pathname.endsWith("/console") ? tw`text-xs font-mono relative w-full h-screen overflow-hidden` : tw`text-xs font-mono relative`}>
             <SpinnerOverlay visible={!connected} size={'large'} />
             <div
                 css={[
