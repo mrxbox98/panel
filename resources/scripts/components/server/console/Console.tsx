@@ -192,6 +192,10 @@ export default () => {
         };
     }, [connected, instance]);
 
+    const openConsole = () => {
+        window.open(window.location.href + '/console', 'Server Console', 'height=1000,width=1500');
+    };
+
     return (
         <div className={classNames(styles.terminal, 'relative')}>
             <SpinnerOverlay visible={!connected} size={'large'} />
@@ -222,6 +226,11 @@ export default () => {
                     >
                         <ChevronDoubleRightIcon className={'w-4 h-4'} />
                     </div>
+                    <button css={tw`m-auto mr-2 inline-block`} hidden={window.location.href.includes('/console')} onClick={openConsole}>
+                        <svg xmlns="http://www.w3.org/2000/svg" css={tw`m-auto w-6 h-6`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </button>
                 </div>
             )}
         </div>
