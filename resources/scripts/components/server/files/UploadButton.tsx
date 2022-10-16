@@ -71,6 +71,12 @@ export default ({ className }: WithClassname) => {
             return addError('Folder uploads are not supported at this time.', 'Error');
         }
 
+        console.log(list[0].size);
+
+        if(list.some((file) => file.size > 100000000)) {
+            return addError('One or more of the files you uploaded exceeds 100MB');
+        }
+
         if (!list.length) {
             return;
         }
