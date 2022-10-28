@@ -1,15 +1,12 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';
-import modes from '@/modes';
 import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
-import { bracketMatching, LanguageSupport, StreamLanguage } from '@codemirror/language';
-import { basicSetup, minimalSetup } from '@uiw/codemirror-extensions-basic-setup';
+import { LanguageSupport, StreamLanguage } from '@codemirror/language';
+import { basicSetup } from '@uiw/codemirror-extensions-basic-setup';
 import { langs, loadLanguage } from '@uiw/codemirror-extensions-langs';
 import { hyperLink } from '@uiw/codemirror-extensions-hyper-link';
 import { languages } from '@/languages';
-import { fil } from 'date-fns/locale';
 
 /* require('codemirror/lib/codemirror.css');
 require('codemirror/theme/ayu-mirage.css');
@@ -144,7 +141,7 @@ export default ({ initialContent, filename, mode, fetchContent, onContentSaved, 
     function getLanguage() {
         //Specific cases
         if (filename?.toLocaleUpperCase() === 'DOCKERFILE') {
-            return loadLanguage('dockerfile');
+            setLanguage(loadLanguage('dockerfile'));
         }
 
         if (filename?.match('.*\\..*')) {
@@ -158,7 +155,6 @@ export default ({ initialContent, filename, mode, fetchContent, onContentSaved, 
 
     useEffect(() => {
         if (mode) {
-            console.log(mode);
             setLanguage(loadLanguage(mode as keyof typeof langs));
         }
     }, [mode]);
