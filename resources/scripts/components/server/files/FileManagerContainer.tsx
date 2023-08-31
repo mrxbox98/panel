@@ -24,12 +24,30 @@ import { FileActionCheckbox } from '@/components/server/files/SelectFileCheckbox
 import { hashToPath } from '@/helpers';
 import style from './style.module.css';
 import FadeTransition from '@/components/elements/transitions/FadeTransition';
+import { Form, Formik, useFormikContext } from 'formik';
+import FormikFieldWrapper from '@/components/elements/FormikFieldWrapper';
+
+interface Values {
+    term: string;
+}
+
+let searchString = '';
+
+const SearchWatcher = () => {
+    const { values, submitForm } = useFormikContext<Values>();
+
+    useEffect(() => {
+        submitForm();
+    }, [ values.term ]);
+
+    return null;
+};
 
 const sortFiles = (files: FileObject[]): FileObject[] => {
     const sortedFiles: FileObject[] = files
         .sort((a, b) => a.name.localeCompare(b.name))
         .sort((a, b) => (a.isFile === b.isFile ? 0 : a.isFile ? 1 : -1));
-    return sortedFiles.filter((file, index) => index === 0 || file.name !== sortedFiles[index - 1]?.name);
+    return sortedFiles.filter((file, index) => index === 0 || file.name !== sortedFiles[index - 1].name).filter((file) => file.name.includes(searchString));
 };
 
 export default () => {
@@ -60,6 +78,13 @@ export default () => {
     if (error) {
         return <ServerError message={httpErrorToHuman(error)} onRetry={() => mutate()} />;
     }
+
+    const searchFiles = (values: Values) => {
+        if (files) {
+            searchString = values.term;
+            sortFiles(files);
+        }
+    };
 
     return (
         <ServerContentBlock title={'File Manager'} showFlashKey={'files'}>
